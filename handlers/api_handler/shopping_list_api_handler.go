@@ -42,6 +42,18 @@ func ShowHandler(c *gin.Context) {
 	}
 }
 
+func ShowDosenPAHandlerByIdentifier(c *gin.Context) {
+	identifier := c.Param("identifier")
+	dosenPA, _ := repositories.FindDosenPAByIdentifier(identifier)
+
+	// Check if resource exist
+	if dosenPA.Id == 0 {
+		c.JSON(http.StatusNotFound, "Not found")
+	} else {
+		c.JSON(http.StatusOK, dosenPA)
+	}
+}
+
 func PutHandler(c *gin.Context) {
 	id := utils.GetInt64IdFromReqContext(c)
 	var shoppingList entity.ShoppingList

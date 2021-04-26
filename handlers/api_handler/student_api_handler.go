@@ -42,6 +42,18 @@ func ShowStudentHandler(c *gin.Context) {
 	}
 }
 
+func ShowStudentHandlerByIdentifier(c *gin.Context) {
+	identifier := c.Param("identifier")
+	student, _ := repositories.FindStudentByIdentifier(identifier)
+
+	// Check if resource exist
+	if student.Id == 0 {
+		c.JSON(http.StatusNotFound, "Not found")
+	} else {
+		c.JSON(http.StatusOK, student)
+	}
+}
+
 func PutStudentHandler(c *gin.Context) {
 	id := utils.GetInt64IdFromReqContext(c)
 	var student entity.Student

@@ -64,6 +64,17 @@ func FindDosenPAById(id int64) (dosenPA entity.DosenPA, err error) {
 	return
 }
 
+func FindDosenPAByIdentifier(identifier string) (dosenPA entity.DosenPA, err error) {
+	db := utils.DBConn()
+	defer db.Close()
+
+	query := "SELECT dosen_id, name, identifier, email, age FROM dosen_pa WHERE dosen_id = ?"
+
+	row := db.QueryRow(query, identifier)
+	err = row.Scan(&dosenPA.Id, &dosenPA.Name, &dosenPA.Identifier, &dosenPA.Email, &dosenPA.Age)
+
+	return
+}
 
 func PutDosenPAByID(id int64, dosenPA entity.DosenPA) (entity.DosenPA, error) {
 	db := utils.DBConn()

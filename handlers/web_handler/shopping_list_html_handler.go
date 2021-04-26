@@ -1,4 +1,4 @@
-package html_handler
+package web_handler
 
 import (
 	"github.com/gin-gonic/gin"

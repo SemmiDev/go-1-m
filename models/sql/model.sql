@@ -1,25 +1,36 @@
 DROP DATABASE student_dosen_pa;
 CREATE DATABASE student_dosen_pa;
+
 USE student_dosen_pa;
+
+DROP TABLE shopping_list;
 DROP TABLE student;
 DROP TABLE dosen_pa;
 
+CREATE TABLE `shopping_list` (
+    `id`        bigint(20) NOT NULL AUTO_INCREMENT,
+    `name`      varchar(100) NOT NULL,
+    `qty`       int(11) NOT NULL,
+    `unit`      varchar(100) NOT NULL,
+     PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE dosen_pa (
-      dosen_id     BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      name         VARCHAR(100) NOT NULL,
-      identifier   CHAR(10) NOT NULL UNIQUE ,
-      email        VARCHAR(100) NOT NULL UNIQUE,
-      age          INT NOT NULL
+    dosen_id     BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name         VARCHAR(100) NOT NULL,
+    identifier   CHAR(10) NOT NULL UNIQUE ,
+    email        VARCHAR(100) NOT NULL UNIQUE,
+    age          INT NOT NULL
 );
 
 CREATE TABLE student (
-       student_id   BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-       name         VARCHAR(100) NOT NULL,
-       identifier   CHAR(10) NOT NULL UNIQUE ,
-       email        VARCHAR(100) NOT NULL UNIQUE,
-       age          INT NOT NULL,
-       dosen_pa_id  BIGINT,
-       constraint foreign key (dosen_pa_id)  REFERENCES dosen_pa(dosen_id) ON DELETE SET NULL ON UPDATE CASCADE
+    student_id   BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name         VARCHAR(100) NOT NULL,
+    identifier   CHAR(10) NOT NULL UNIQUE ,
+    email        VARCHAR(100) NOT NULL UNIQUE,
+    age          INT NOT NULL,
+    dosen_pa_id  BIGINT,
+    constraint foreign key (dosen_pa_id)  REFERENCES dosen_pa(dosen_id) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 INSERT INTO dosen_pa(name, identifier, email, age) VALUES
@@ -28,7 +39,6 @@ INSERT INTO dosen_pa(name, identifier, email, age) VALUES
 ('sammidev3', '1111111113', 'sammidev3', 27),
 ('sammidev4', '1111111114', 'sammidev4', 28),
 ('sammidev5', '1111111115', 'sammidev5', 29);
-
 
 INSERT INTO student(name, identifier, email, age, dosen_pa_id) VALUES
 ('sam1', '1111111111', 'sam1', 19, 1),

@@ -2,19 +2,19 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"grocery/controllers/apis"
-	"grocery/controllers/web"
+	"grocery/controllers/api_controller"
+	"grocery/controllers/web_controller"
 	"log"
 )
 
 func main() {
 	log.Println("starting go with templates")
-	r := gin.Default()
 
-	apis.Route(r)
+	r := gin.Default()
+	api_controller.Route(r)
 
 	r.LoadHTMLGlob("templates/**/*")
-	web.Route(r)
+	web_controller.Route(r)
 
 	_ = r.Run()
 }

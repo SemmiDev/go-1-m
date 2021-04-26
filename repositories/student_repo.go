@@ -64,6 +64,18 @@ func FindStudentById(id int64) (student entity.Student, err error) {
 	return
 }
 
+func FindStudentByIdentifier(identifier string) (student entity.Student, err error) {
+	db := utils.DBConn()
+	defer db.Close()
+
+	query := "SELECT student_id, name, identifier, email, age, dosen_pa_id FROM student WHERE student_identifier = ?"
+
+	row := db.QueryRow(query, identifier)
+	err = row.Scan(&student.Id, &student.Name, &student.Identifier, &student.Email, &student.Age, &student.DosenPAID)
+
+	return
+}
+
 func PutStudentByID(id int64, student entity.Student) (entity.Student, error) {
 	db := utils.DBConn()
 	defer db.Close()

@@ -1,4 +1,4 @@
-package apis
+package api_controller
 
 import (
 	"github.com/gin-gonic/gin"
@@ -25,6 +25,7 @@ func Route(r *gin.Engine) *gin.Engine {
 	{
 		v1Student.POST("/", api_handler.CreateStudentHandler)
 		v1Student.GET("/:id", api_handler.ShowStudentHandler)
+		v1Student.GET("/:identifier", api_handler.ShowStudentHandlerByIdentifier)
 		v1Student.GET("/join", api_handler.ShowStudentJoinDOsenHandler)
 		v1Student.PUT("/:id", api_handler.PutStudentHandler)
 		v1Student.DELETE("/:id", api_handler.DeleteStudentHandler)
@@ -34,6 +35,7 @@ func Route(r *gin.Engine) *gin.Engine {
 	{
 		v1Dosen.POST("/", api_handler.CreateDosenPAHandler)
 		v1Dosen.GET("/:id", api_handler.ShowDosenPAHandler)
+		v1Dosen.GET("/:identifier", api_handler.ShowDosenPAHandlerByIdentifier)
 		v1Dosen.PUT("/:id", api_handler.PutDosenPAHandler)
 		v1Dosen.DELETE("/:id", api_handler.DeleteDosenPAHandler)
 	}
